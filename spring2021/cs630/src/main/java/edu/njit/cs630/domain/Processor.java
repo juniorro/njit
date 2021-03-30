@@ -14,7 +14,7 @@ public class Processor {
     private long interrupts;
     private String vendorFequency;
     private String cpuLoad;
-    private Map<String, String> cpuLoadPerProcessor = new LinkedHashMap<>();
+    private Map<String, String> cpuLoadPerCore = new LinkedHashMap<>();
     private Map<String, String> frequencyPerCore = new LinkedHashMap<>();
 
     public Processor() { }
@@ -59,12 +59,12 @@ public class Processor {
         this.cpuLoad = cpuLoad;
     }
 
-    public Map<String, String> getCpuLoadPerProcessor() {
-        return cpuLoadPerProcessor;
+    public Map<String, String> getCpuLoadPerCore() {
+        return cpuLoadPerCore;
     }
 
-    public void setCpuLoadPerProcessor(LinkedHashMap<String, String> cpuLoadPerProcessor) {
-        this.cpuLoadPerProcessor = cpuLoadPerProcessor;
+    public void setCpuLoadPerCore(LinkedHashMap<String, String> cpuLoadPerCore) {
+        this.cpuLoadPerCore = cpuLoadPerCore;
     }
 
     public Map<String, String> getFrequencyPerCore() {

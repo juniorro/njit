@@ -67,12 +67,12 @@ public class SystemResource {
         Util.sleep(1000);
         processor.setCpuLoad(String.format("%.2f%%", hardware.getProcessor().getSystemCpuLoadBetweenTicks(prevTicks) * 100));
         double[] cores = hardware.getProcessor().getProcessorCpuLoadBetweenTicks(prevProcTicks);
-        LinkedHashMap<String, String> cpuLoadPerProcessor = new LinkedHashMap<>();
+        LinkedHashMap<String, String> cpuLoadPerCore = new LinkedHashMap<>();
         int coresCounter = 0;
         for (double core : cores) {
-            cpuLoadPerProcessor.put("CPU Core " + String.valueOf(++coresCounter), String.format("%.1f%%", core * 100));
+            cpuLoadPerCore.put("CPU Core " + String.valueOf(++coresCounter), String.format("%.1f%%", core * 100));
         }
-        processor.setCpuLoadPerProcessor(cpuLoadPerProcessor);
+        processor.setCpuLoadPerCore(cpuLoadPerCore);
         LinkedHashMap<String, String> frequencyPerCore = new LinkedHashMap<>();
         long[] freqencies = hardware.getProcessor().getCurrentFreq();
         coresCounter = 0;
