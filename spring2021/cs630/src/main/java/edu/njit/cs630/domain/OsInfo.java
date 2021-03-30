@@ -11,7 +11,7 @@ import java.util.List;
  * @since 3/27/2021
  */
 public class OsInfo {
-    private List<String> details = new ArrayList<>();
+    private List<String> details;
     private ComputerSystem computerSystem;
 
     public OsInfo(List<String> details, ComputerSystem computerSystem) {
