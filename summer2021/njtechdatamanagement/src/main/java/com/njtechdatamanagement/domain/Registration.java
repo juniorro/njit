@@ -9,9 +9,9 @@ import lombok.experimental.SuperBuilder;
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 /**
- * @author Roland Junior Toussaint
+ * @author Get Arrays (https://www.getarrays.io/)
  * @version 1.0
- * @since 7/25/2021
+ * @since 7/28/2021
  */
 
 @Data
@@ -20,7 +20,17 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @AllArgsConstructor
 @JsonInclude(NON_NULL)
 public class Registration {
+    private Long courseCode;
+    private Long sectionCode;
+    private String courseName;
+    private String weekDay;
+    private String time;
+    private String buildingName;
+    private String buildingLocation;
+    private String instructor;
     private Long studentId;
-    private Long sectionId;
-    private Long courseId;
+    private String studentFirstName;
+    private String studentLastName;
+    private String studentMajor;
+    private String studentYear;
 }

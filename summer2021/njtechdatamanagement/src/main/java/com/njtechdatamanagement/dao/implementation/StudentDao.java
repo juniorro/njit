@@ -1,10 +1,7 @@
 package com.njtechdatamanagement.dao.implementation;
 
 import com.njtechdatamanagement.dao.DataDao;
-import com.njtechdatamanagement.domain.Course;
-import com.njtechdatamanagement.domain.Registration;
-import com.njtechdatamanagement.domain.Section;
-import com.njtechdatamanagement.domain.Student;
+import com.njtechdatamanagement.domain.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
@@ -14,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -48,12 +44,24 @@ public class StudentDao implements DataDao<Student> {
             .instructorSnn(resultSet.getLong("staff_ssn"))
             .build();
 
-    RowMapper<Course> mapRowMapper = (resultSet, rowNumber) -> Course.builder()
-            .id(resultSet.getLong("id"))
+    RowMapper<Registration> registrationRowMapper = (resultSet, rowNumber) -> Registration.builder()
+            .courseCode(resultSet.getLong("course_code"))
+            .sectionCode(resultSet.getLong("section_code"))
+            .courseName(resultSet.getString("course_name"))
+            .weekDay(resultSet.getString("week_day"))
+            .time(resultSet.getString("time"))
+            .buildingName(resultSet.getString("building_name"))
+            .buildingLocation(resultSet.getString("building_location"))
+            .instructor(resultSet.getString("instructor"))
+            .studentId(resultSet.getLong("student_id"))
+            .studentFirstName(resultSet.getString("student_first_name"))
+            .studentLastName(resultSet.getString("student_last_name"))
+            .studentMajor(resultSet.getString("student_major"))
+            .studentYear(resultSet.getString("student_year") + "Year")
             .build();
 
-    public Registration registerStudent(Long studentId, String courseNumber, int sectionNumber) {
-        Registration registration;
+    public RegistrationPayload registerStudent(Long studentId, String courseNumber, int sectionNumber) {
+        RegistrationPayload registrationPayload;
         Student student = get(studentId);
             if(sectionNumber > 0) {
                 String sectionQuery = "SELECT * FROM Section WHERE section_number = ?";
@@ -65,17 +73,17 @@ public class StudentDao implements DataDao<Student> {
                 } else {
                     String insertQuery = "INSERT INTO Registration (student_id, section_number, course_number) VALUES (?, ?, ?)";
                     template.update(insertQuery, student.getId(), section.getId(), section.getCourseId());
-                    registration = new Registration(student.getId(), section.getId(), section.getCourseId());
+                    registrationPayload = new RegistrationPayload(student.getId(), section.getId(), section.getCourseId());
                 }
             } else {
                 throw new RuntimeException("A section number is required to enroll in a course");
         }
-        return registration;
+        return registrationPayload;
     }
 
-    public Map<Object, Object> listSection() {
-        String query = "USE njtechdata; SELECT c.course_number AS 'course_code', sec.section_number AS 'section_code', c.course_name, secro.section_in_room_weekday AS 'week_day', secro.section_in_room_time AS 'time', bu.building_name, bu.building_location, st.staff_name AS 'instructor', s.student_id, s.student_first_name, s.student_last_name, s.student_major, s.student_year FROM students s JOIN registrations reg ON s.student_id = reg.student_id JOIN sections sec ON reg.section_number = sec.section_number JOIN courses c ON reg.course_number = c.course_number JOIN departments dep ON c.department_code = dep.department_code JOIN staff st ON sec.staff_ssn = st.staff_ssn JOIN sectioninrooms secro ON c.course_number = secro.course_number JOIN buildings bu ON secro.building_id = bu.building_id ORDER BY s.student_last_name ASC;";
-        return null; //template.queryForObject(query, mapRowMapper);
+    public Collection<Registration> registration() {
+        String query = "SELECT c.course_number AS 'course_code', sec.section_number AS 'section_code', c.course_name, secro.section_in_room_weekday AS 'week_day', secro.section_in_room_time AS 'time', bu.building_name, bu.building_location, st.staff_name AS 'instructor', s.student_id, s.student_first_name, s.student_last_name, s.student_major, s.student_year FROM students s JOIN registrations reg ON s.student_id = reg.student_id JOIN sections sec ON reg.section_number = sec.section_number JOIN courses c ON reg.course_number = c.course_number JOIN departments dep ON c.department_code = dep.department_code JOIN staff st ON sec.staff_ssn = st.staff_ssn JOIN sectioninrooms secro ON c.course_number = secro.course_number JOIN buildings bu ON secro.building_id = bu.building_id ORDER BY s.student_last_name ASC";
+        return template.query(query, registrationRowMapper);
     }
 
     @Override

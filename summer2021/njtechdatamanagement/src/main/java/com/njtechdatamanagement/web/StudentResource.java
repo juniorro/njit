@@ -2,6 +2,7 @@ package com.njtechdatamanagement.web;
 
 import com.njtechdatamanagement.dao.implementation.StudentDao;
 import com.njtechdatamanagement.domain.Registration;
+import com.njtechdatamanagement.domain.RegistrationPayload;
 import com.njtechdatamanagement.domain.Student;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +29,13 @@ public class StudentResource {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Registration> registerStudent(@RequestBody RegisterForm form) {
+    public ResponseEntity<RegistrationPayload> registerStudent(@RequestBody RegisterForm form) {
         return ResponseEntity.ok().body(studentDao.registerStudent(form.getStudentId(), form.getCourseCode(), form.getSectionNumber()));
+    }
+
+    @GetMapping("/registrations")
+    public ResponseEntity<Collection<Registration>> getRegistrations() {
+        return ResponseEntity.ok().body(studentDao.registration());
     }
 
     @PostMapping("/save")
