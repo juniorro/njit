@@ -4,12 +4,12 @@ import com.njtechdatamanagement.dao.implementation.StudentDao;
 import com.njtechdatamanagement.domain.Registration;
 import com.njtechdatamanagement.domain.RegistrationPayload;
 import com.njtechdatamanagement.domain.Student;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Roland Junior Toussaint
@@ -24,13 +24,14 @@ public class StudentResource {
     private final StudentDao studentDao;
 
     @GetMapping("/list")
-    public ResponseEntity<Collection<Student>> getStudents() {
-        return ResponseEntity.ok().body(studentDao.list(5));
+    public ResponseEntity<Collection<Student>> getStudents() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(2);
+        return ResponseEntity.ok().body(studentDao.list(30));
     }
 
     @PostMapping("/register")
-    public ResponseEntity<RegistrationPayload> registerStudent(@RequestBody RegisterForm form) {
-        return ResponseEntity.ok().body(studentDao.registerStudent(form.getStudentId(), form.getCourseCode(), form.getSectionNumber()));
+    public ResponseEntity<RegistrationPayload> registerStudent(@RequestBody RegistrationPayload form) {
+        return ResponseEntity.ok().body(studentDao.registerStudent(form.getStudentId(), form.getCourseId(), form.getSectionId()));
     }
 
     @GetMapping("/registrations")
@@ -58,11 +59,4 @@ public class StudentResource {
         return ResponseEntity.ok().body(studentDao.delete(id));
     }
 
-}
-
-@Data
-class RegisterForm {
-    private Long studentId;
-    private String courseCode;
-    private int sectionNumber;
 }

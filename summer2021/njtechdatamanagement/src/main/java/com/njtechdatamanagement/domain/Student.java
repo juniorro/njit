@@ -20,7 +20,8 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 public class Student {
     private Long id;
     private String ssn;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String address;
     private String highSchool;
     private String year;
