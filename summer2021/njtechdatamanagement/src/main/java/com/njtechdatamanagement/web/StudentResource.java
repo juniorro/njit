@@ -1,15 +1,22 @@
 package com.njtechdatamanagement.web;
 
 import com.njtechdatamanagement.dao.implementation.StudentDao;
+import com.njtechdatamanagement.domain.HttpResponse;
 import com.njtechdatamanagement.domain.Registration;
 import com.njtechdatamanagement.domain.RegistrationPayload;
 import com.njtechdatamanagement.domain.Student;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
+
+import static java.util.Collections.singleton;
+import static org.springframework.http.HttpStatus.OK;
 
 /**
  * @author Roland Junior Toussaint
@@ -24,9 +31,17 @@ public class StudentResource {
     private final StudentDao studentDao;
 
     @GetMapping("/list")
-    public ResponseEntity<Collection<Student>> getStudents() throws InterruptedException {
+    public ResponseEntity<HttpResponse<?, ?>>getStudents() throws InterruptedException {
         TimeUnit.SECONDS.sleep(2);
-        return ResponseEntity.ok().body(studentDao.list(30));
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                .timeStamp(LocalDateTime.now())
+                .students(studentDao.list(30))
+                .developerMessage("All students retrieved")
+                .message("All students retrieved")
+                .status(OK)
+                .statusCode(OK.value())
+                .build());
     }
 
     @PostMapping("/register")
@@ -35,8 +50,16 @@ public class StudentResource {
     }
 
     @GetMapping("/registrations")
-    public ResponseEntity<Collection<Registration>> getRegistrations() {
-        return ResponseEntity.ok().body(studentDao.registration());
+    public ResponseEntity<HttpResponse<?, ?>> getRegistrations() {
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .registrations(singleton(studentDao.registration()))
+                        .developerMessage("Registrations retrieved")
+                        .message("Registrations retrieved")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build());
     }
 
     @PostMapping("/save")

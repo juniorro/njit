@@ -1,7 +1,7 @@
 package com.njtechdatamanagement.exception;
 
 /**
- * @author Get Arrays (https://www.getarrays.io/)
+ * @author Roland Junior Toussaint
  * @version 1.0
  * @since 7/29/2021
  */
@@ -45,12 +45,12 @@ public class HandleException extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<HttpResponse<?>> internalServerErrorException(Exception exception) {
+    public ResponseEntity<HttpResponse<?, ?>> internalServerErrorException(Exception exception) {
         log.error(exception.getMessage());
         return createErrorHttpResponse(INTERNAL_SERVER_ERROR, INTERNAL_SERVER_ERROR_MSG, exception);
     }
 
-    private ResponseEntity<HttpResponse<?>> createErrorHttpResponse(HttpStatus httpStatus, String reason, Exception exception) {
+    private ResponseEntity<HttpResponse<?, ?>> createErrorHttpResponse(HttpStatus httpStatus, String reason, Exception exception) {
         return new ResponseEntity<>(
                 HttpResponse.builder()
                         .timeStamp(LocalDateTime.now())

@@ -13,12 +13,13 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @Data
 @SuperBuilder
 @JsonInclude(NON_NULL)
-public class HttpResponse<T> {
+public class HttpResponse<T, F> {
     protected LocalDateTime timeStamp;
     protected int statusCode;
     protected HttpStatus status;
     protected String reason;
     protected String message;
     protected String developerMessage;
-    protected Collection<? extends T> data;
+    protected Collection<? extends T> students;
+    protected Collection<? extends F> registrations;
 }
