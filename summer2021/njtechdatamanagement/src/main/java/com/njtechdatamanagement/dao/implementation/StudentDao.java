@@ -64,7 +64,7 @@ public class StudentDao implements DataDao<Student> {
 
     @Override
     public Collection<Student> list(int limit) throws DataAccessException {
-        String query = "SELECT * FROM Students LIMIT ?";
+        String query = "SELECT * FROM Students ORDER BY student_first_name LIMIT ?";
         return template.query(query, studentRowMapper, limit);
     }
 
