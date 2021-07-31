@@ -112,3 +112,25 @@ CREATE TABLE SectionInRooms
     FOREIGN KEY (room_number) REFERENCES Rooms (room_number),
     FOREIGN KEY (course_number) REFERENCES Courses (course_number)
 );
+
+DROP TABLE IF EXISTS Assignments;
+
+CREATE TABLE Assignments
+(
+    staff_ssn      BIGINT UNSIGNED NOT NULL,
+    course_number  BIGINT UNSIGNED NOT NULL,
+    section_number BIGINT UNSIGNED NOT NULL,
+    FOREIGN KEY (staff_ssn) REFERENCES Staff (staff_ssn),
+    FOREIGN KEY (course_number) REFERENCES Courses (course_number),
+    FOREIGN KEY (section_number) REFERENCES Sections (section_number)
+);
+
+DROP TABLE IF EXISTS FacultyDepartments;
+
+CREATE TABLE FacultyDepartments
+(
+    staff_ssn       BIGINT UNSIGNED NOT NULL,
+    department_code BIGINT UNSIGNED NOT NULL,
+    FOREIGN KEY (staff_ssn) REFERENCES Staff (staff_ssn),
+    FOREIGN KEY (department_code) REFERENCES Departments (department_code)
+);
