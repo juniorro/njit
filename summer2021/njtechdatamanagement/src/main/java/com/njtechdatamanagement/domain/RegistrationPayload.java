@@ -23,4 +23,5 @@ public class RegistrationPayload {
     private Long studentId;
     private Long sectionId;
     private Long courseId;
+    private String time;
 }

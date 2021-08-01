@@ -103,14 +103,16 @@ DROP TABLE IF EXISTS SectionInRooms;
 
 CREATE TABLE SectionInRooms
 (
-    building_id             BIGINT UNSIGNED NOT NULL,
-    room_number             BIGINT UNSIGNED NOT NULL,
-    course_number           BIGINT UNSIGNED NOT NULL,
-    section_in_room_weekday VARCHAR(30) DEFAULT NULL,
-    section_in_room_time    VARCHAR(30) DEFAULT NULL,
+    building_id    BIGINT UNSIGNED NOT NULL,
+    room_number    BIGINT UNSIGNED NOT NULL,
+    course_number  BIGINT UNSIGNED NOT NULL,
+    section_number BIGINT UNSIGNED NOT NULL,
+    weekday        VARCHAR(30) DEFAULT NULL,
+    time           VARCHAR(30) DEFAULT NULL,
     FOREIGN KEY (building_id) REFERENCES Buildings (building_id),
     FOREIGN KEY (room_number) REFERENCES Rooms (room_number),
-    FOREIGN KEY (course_number) REFERENCES Courses (course_number)
+    FOREIGN KEY (course_number) REFERENCES Courses (course_number),
+    FOREIGN KEY (section_number) REFERENCES Sections (section_number)
 );
 
 DROP TABLE IF EXISTS Assignments;

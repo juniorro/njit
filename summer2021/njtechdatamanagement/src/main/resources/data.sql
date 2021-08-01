@@ -117,13 +117,12 @@ INSERT INTO Rooms (building_id, room_capacity, room_audio_visual) VALUES (1, 10,
 INSERT INTO Rooms (building_id, room_capacity, room_audio_visual) VALUES (2, 35, TRUE);
 
 # Adding section in rooms in the database
-INSERT INTO SectionInRooms (building_id, room_number, course_number, section_in_room_weekday, section_in_room_time) VALUES (9, 6, 8, 'Mon-Tue-Fri', '8:00-10:00 am');
-INSERT INTO SectionInRooms (building_id, room_number, course_number, section_in_room_weekday, section_in_room_time) VALUES (2, 9, 9, 'Tue-Thu', '8:00-10:00 am');
-INSERT INTO SectionInRooms (building_id, room_number, course_number, section_in_room_weekday, section_in_room_time) VALUES (6, 2, 7, 'Wed-Thu', '11:00-02:00 pm');
-INSERT INTO SectionInRooms (building_id, room_number, course_number, section_in_room_weekday, section_in_room_time) VALUES (7, 6, 4, 'Mon-Wed', '06:00-05:30 am');
-INSERT INTO SectionInRooms (building_id, room_number, course_number, section_in_room_weekday, section_in_room_time) VALUES (4, 1, 8, 'Mon-Wed-Fri', '8:00-10:00 am');
-INSERT INTO SectionInRooms (building_id, room_number, course_number, section_in_room_weekday, section_in_room_time) VALUES (4, 7, 6, 'Thu-Fri', '05:00-08:00 am');
-INSERT INTO SectionInRooms (building_id, room_number, course_number, section_in_room_weekday, section_in_room_time) VALUES (6, 6, 1, 'Wed-Thu', '10:00-12:00 pm');
-INSERT INTO SectionInRooms (building_id, room_number, course_number, section_in_room_weekday, section_in_room_time) VALUES (8, 3, 8, 'Mon-Wed-Fri', '03:00-05:15 pm');
-INSERT INTO SectionInRooms (building_id, room_number, course_number, section_in_room_weekday, section_in_room_time) VALUES (8, 8, 3, 'Tue-Fri', '12:00-01:30 pm');
-INSERT INTO SectionInRooms (building_id, room_number, course_number, section_in_room_weekday, section_in_room_time) VALUES (2, 5, 5, 'Mon-Wed', '9:00-11:00 am');
+INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (9, 6, 8, 3, 'Mon-Tue-Fri', '8:00-10:00 am');
+INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (2, 9, 9, 9, 'Tue-Thu', '8:00-10:00 am');
+INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (6, 2, 7, 4, 'Wed-Thu', '11:00-02:00 pm');
+INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (7, 6, 4, 6, 'Mon-Wed', '06:00-05:30 am');
+INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (4, 1, 8, 3, 'Mon-Wed-Fri', '8:00-10:00 am');
+INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (4, 7, 6, 5, 'Thu-Fri', '05:00-08:00 am');
+INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (6, 6, 1, 8, 'Wed-Thu', '10:00-12:00 pm');
+INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (8, 8, 3, 2, 'Tue-Fri', '12:00-01:30 pm');
+INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (2, 5, 5, 1, 'Mon-Wed', '9:00-11:00 am');

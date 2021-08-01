@@ -31,8 +31,8 @@ public class StudentResource {
     private final StudentDao studentDao;
 
     @GetMapping("/list")
-    public ResponseEntity<HttpResponse<?, ?>>getStudents() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(2);
+    public ResponseEntity<HttpResponse<?, ?>>getStudents() {
+        //TimeUnit.SECONDS.sleep(2);
         return ResponseEntity.ok().body(
                 HttpResponse.builder()
                 .timeStamp(LocalDateTime.now())
@@ -46,7 +46,7 @@ public class StudentResource {
 
     @PostMapping("/register")
     public ResponseEntity<RegistrationPayload> registerStudent(@RequestBody RegistrationPayload form) {
-        return ResponseEntity.ok().body(studentDao.registerStudent(form.getStudentId(), form.getCourseId(), form.getSectionId()));
+        return ResponseEntity.ok().body(studentDao.registerStudent(form.getStudentId(), form.getCourseId(), form.getSectionId(), form.getTime()));
     }
 
     @GetMapping("/registrations")
@@ -54,7 +54,7 @@ public class StudentResource {
         return ResponseEntity.ok().body(
                 HttpResponse.builder()
                         .timeStamp(LocalDateTime.now())
-                        .registrations(singleton(studentDao.registration()))
+                        .registrations(studentDao.registration())
                         .developerMessage("Registrations retrieved")
                         .message("Registrations retrieved")
                         .status(OK)
