@@ -8,6 +8,7 @@ import com.njtechdatamanagement.mapper.SectionRowMapper;
 import com.njtechdatamanagement.mapper.StudentRowMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -33,19 +34,30 @@ public class StudentDao implements DataDao<Student> {
     public RegistrationPayload registerStudent(Long studentId, Long courseNumber, Long sectionNumber, String time) {
         RegistrationPayload registrationPayload;
         Student student;
-        Course course;
+        Course course = null;
         Section section = null;
         try {
             student = get(studentId);
         } catch (Exception exception) {
             throw new RuntimeException("Student not found. Please verify the student ID.");
         }
-        if (courseNumber != null && time != null) {
+        String totalClassQuery = "SELECT COUNT(student_id) FROM Registrations WHERE student_id = ?";
+        Integer currentStudentCount = template.queryForObject(totalClassQuery, Integer.class, student.getId());
+        if(currentStudentCount == 4) {
+            throw new RuntimeException("Student is already taking 4 classes for the semester.");
+        }
+        if (courseNumber != null && StringUtils.isNotBlank(time)) {
             String courseQuery = "SELECT * FROM Courses WHERE course_number = ?";
             try {
                 course = template.queryForObject(courseQuery, new CourseRowMapper(), courseNumber);
             } catch (Exception exception) {
                 throw new RuntimeException("Course not found. Please verify the course code.");
+            }
+            String alreadyRegisteredQuery = "SELECT student_id FROM Registrations WHERE student_id = ? AND course_number = ?";
+            Integer alreadyRegisteredStudentId = template.queryForObject(alreadyRegisteredQuery, Integer.class, student.getId(), course.getId());
+            if (alreadyRegisteredStudentId != 0) {
+                System.out.println(alreadyRegisteredStudentId);
+                throw new RuntimeException("Student is already registered for this course.");
             }
             String sectionInRoomQuery = "SELECT section_number FROM SectionInRooms WHERE course_number = ? AND time = ?";
             Long sectionId = template.queryForObject(sectionInRoomQuery, Long.class, sectionNumber, time);
@@ -59,7 +71,12 @@ public class StudentDao implements DataDao<Student> {
             } catch (Exception exception) {
                 throw new RuntimeException("Section not found. Please verify the section number.");
             }
-            if (section.getMaxEnroll() + ONE > section.getMaxEnroll()) {
+            String alreadyRegisteredQuery = "SELECT student_id FROM Registrations WHERE student_id = ? AND course_number = ?";
+            Integer alreadyRegisteredStudentId = template.queryForObject(alreadyRegisteredQuery, Integer.class, student.getId(), course.getId());
+            String currentEnrolledQuery = "SELECT COUNT(section_number) FROM registrations WHERE section_number = ?";
+            Integer currentEnrolled = template.queryForObject(currentEnrolledQuery, Integer.class, section.getId());
+            if (currentEnrolled + ONE > section.getMaxEnroll()) {
+                System.out.println(section.getMaxEnroll());
                 throw new RuntimeException("Unable to register student. There is no more room in this section.");
             } else {
                 String insertQuery = "INSERT INTO Registrations (student_id, section_number, course_number) VALUES (?, ?, ?)";
