@@ -71,8 +71,15 @@ public class StudentDao implements DataDao<Student> {
             } catch (Exception exception) {
                 throw new RuntimeException("Section not found. Please verify the section number.");
             }
-            String alreadyRegisteredQuery = "SELECT student_id FROM Registrations WHERE student_id = ? AND course_number = ?";
-            Integer alreadyRegisteredStudentId = template.queryForObject(alreadyRegisteredQuery, Integer.class, student.getId(), course.getId());
+            String alreadyRegisteredQuery = "SELECT course_number FROM Registrations WHERE student_id = ? AND section_number = ?";
+            Integer alreadyRegisteredCourseId = null;
+            try {
+                alreadyRegisteredCourseId = template.queryForObject(alreadyRegisteredQuery, Integer.class, student.getId(), section.getId());
+            } catch (Exception ignored) {
+
+            }
+            System.out.println(alreadyRegisteredCourseId);
+            if(alreadyRegisteredCourseId != null) { throw new RuntimeException("Student is already registered for this course."); }
             String currentEnrolledQuery = "SELECT COUNT(section_number) FROM registrations WHERE section_number = ?";
             Integer currentEnrolled = template.queryForObject(currentEnrolledQuery, Integer.class, section.getId());
             if (currentEnrolled + ONE > section.getMaxEnroll()) {
