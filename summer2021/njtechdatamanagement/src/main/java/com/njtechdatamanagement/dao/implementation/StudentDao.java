@@ -10,12 +10,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+
+import static java.util.Collections.singletonList;
 
 /**
  * @author Roland Junior Toussaint
@@ -53,17 +56,21 @@ public class StudentDao implements DataDao<Student> {
             } catch (Exception exception) {
                 throw new RuntimeException("Course not found. Please verify the course code.");
             }
-            String alreadyRegisteredQuery = "SELECT student_id FROM Registrations WHERE student_id = ? AND course_number = ?";
-            Integer alreadyRegisteredStudentId = template.queryForObject(alreadyRegisteredQuery, Integer.class, student.getId(), course.getId());
-            if (alreadyRegisteredStudentId != 0) {
-                System.out.println(alreadyRegisteredStudentId);
+            String alreadyRegisteredQuery = "SELECT course_number FROM Registrations WHERE student_id = ? AND course_number = ?";
+            Integer alreadyRegisteredStudentId = null;
+            try {
+                alreadyRegisteredStudentId = template.queryForObject(alreadyRegisteredQuery, Integer.class, student.getId(), course.getId());
+            } catch (Exception ignored) {
+
+            }
+            if (alreadyRegisteredStudentId != null) {
                 throw new RuntimeException("Student is already registered for this course.");
             }
             String sectionInRoomQuery = "SELECT section_number FROM SectionInRooms WHERE course_number = ? AND time = ?";
-            Long sectionId = template.queryForObject(sectionInRoomQuery, Long.class, sectionNumber, time);
+            Long sectionId = template.queryForObject(sectionInRoomQuery, Long.class, courseNumber, time);
             String insertQuery = "INSERT INTO Registrations (student_id, section_number, course_number) VALUES (?, ?, ?)";
             template.update(insertQuery, student.getId(), sectionId, courseNumber);
-            registrationPayload = new RegistrationPayload(student.getId(), section.getId(), course.getId(), time);
+            registrationPayload = new RegistrationPayload(student.getId(), sectionId, course.getId(), time);
         } else {
             String sectionQuery = "SELECT * FROM Sections WHERE section_number = ?";
             try {
