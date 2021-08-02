@@ -72,8 +72,8 @@ INSERT INTO Staff (staff_ssn, staff_name, staff_salary, staff_rank, staff_course
 # Adding sections to the database
 INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (5, 2021, 10, 267027259);
 INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (3, 2020, 4, 554627396);
-INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (8, 2021, 1, 399753850);
-INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (7, 2021, 4, 641341916);
+INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (8, 2021, 5, 399753850);
+INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (7, 2021, 3, 641341916);
 INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (6, 2021, 10, 560803338);
 INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (4, 2021, 12, 876548487);
 INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (2, 2021, 19, 287930387);
@@ -126,3 +126,4 @@ INSERT INTO SectionInRooms (building_id, room_number, course_number, section_num
 INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (6, 6, 1, 8, 'Wed-Thu', '10:00-12:00 pm');
 INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (8, 8, 3, 2, 'Tue-Fri', '12:00-01:30 pm');
 INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (2, 5, 5, 1, 'Mon-Wed', '09:00-11:00 am');
+INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (5, 3, 2, 6, 'Mon-Wed', '10:00-02:00 pm');
