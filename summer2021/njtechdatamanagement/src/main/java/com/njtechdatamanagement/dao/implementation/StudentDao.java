@@ -2,10 +2,7 @@ package com.njtechdatamanagement.dao.implementation;
 
 import com.njtechdatamanagement.dao.DataDao;
 import com.njtechdatamanagement.domain.*;
-import com.njtechdatamanagement.mapper.CourseRowMapper;
-import com.njtechdatamanagement.mapper.RegistrationRowMapper;
-import com.njtechdatamanagement.mapper.SectionRowMapper;
-import com.njtechdatamanagement.mapper.StudentRowMapper;
+import com.njtechdatamanagement.mapper.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -104,6 +101,11 @@ public class StudentDao implements DataDao<Student> {
     public Collection<Registration> registration() {
         String query = "SELECT c.course_number AS 'course_code', sec.section_number AS 'section_code', c.course_name, secro.weekday AS 'week_day', secro.time AS 'time', bu.building_name, bu.building_location, st.staff_name AS 'instructor', s.student_id, s.student_first_name, s.student_last_name, s.student_major, s.student_year FROM students s JOIN registrations reg ON s.student_id = reg.student_id JOIN sections sec ON reg.section_number = sec.section_number JOIN courses c ON reg.course_number = c.course_number JOIN departments dep ON c.department_code = dep.department_code JOIN staff st ON sec.staff_ssn = st.staff_ssn JOIN sectioninrooms secro ON c.course_number = secro.course_number JOIN buildings bu ON secro.building_id = bu.building_id ORDER BY s.student_last_name ASC";
         return template.query(query, new RegistrationRowMapper());
+    }
+
+    public Collection<ClassInfo> getClassInfo() {
+        String query = "SELECT c.course_name, c.course_number, secs.section_number, c.course_credit, secir.weekday, secir.time FROM sectioninrooms secir JOIN courses c ON c.course_number = secir.course_number JOIN sections secs ON secs.section_number = secir.section_number ORDER BY c.course_name ASC;";
+        return template.query(query, new ClassInfoRowMapper());
     }
 
     @Override

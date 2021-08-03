@@ -127,3 +127,4 @@ INSERT INTO SectionInRooms (building_id, room_number, course_number, section_num
 INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (8, 8, 3, 2, 'Tue-Fri', '12:00-01:30 pm');
 INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (2, 5, 5, 1, 'Mon-Wed', '09:00-11:00 am');
 INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (5, 3, 2, 6, 'Mon-Wed', '10:00-02:00 pm');
+# INSERT INTO SectionInRooms (building_id, room_number, course_number, section_number, weekday, time) VALUES (5, 3, 2, 10, 'Mon-Wed', '03:00-06:00 pm');

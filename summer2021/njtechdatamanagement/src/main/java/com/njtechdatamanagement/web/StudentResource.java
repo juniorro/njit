@@ -31,7 +31,7 @@ public class StudentResource {
     private final StudentDao studentDao;
 
     @GetMapping("/list")
-    public ResponseEntity<HttpResponse<?, ?>>getStudents() {
+    public ResponseEntity<HttpResponse<?, ?, ?>>getStudents() {
         //TimeUnit.SECONDS.sleep(2);
         return ResponseEntity.ok().body(
                 HttpResponse.builder()
@@ -50,13 +50,26 @@ public class StudentResource {
     }
 
     @GetMapping("/registrations")
-    public ResponseEntity<HttpResponse<?, ?>> getRegistrations() {
+    public ResponseEntity<HttpResponse<?, ?, ?>> getRegistrations() {
         return ResponseEntity.ok().body(
                 HttpResponse.builder()
                         .timeStamp(LocalDateTime.now())
                         .registrations(studentDao.registration())
                         .developerMessage("Registrations retrieved")
                         .message("Registrations retrieved")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build());
+    }
+
+    @GetMapping("/classinfo")
+    public ResponseEntity<HttpResponse<?, ?, ?>> getClassinfor() {
+        return ResponseEntity.ok().body(
+                HttpResponse.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .classinfo(studentDao.getClassInfo())
+                        .developerMessage("Class with section info retrieved")
+                        .message("Class with section info retrieved")
                         .status(OK)
                         .statusCode(OK.value())
                         .build());
