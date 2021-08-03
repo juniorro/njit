@@ -12,10 +12,16 @@ In this term project, you are asked to design a small database system, create an
 
 ## Installation
 
-Java Installation guide can be found [here](https://java.com/en/download/help/download_options.html).
+Java installation guide can be found [here](https://java.com/en/download/help/download_options.html).
+
+MySQL Server installation guide for Windows can be found [here](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/).
+
+NodeJs installation guide for Windows can be found [here](https://nodejs.org/en/download).
+
+Once NodeJs is install, run the command below to install the dependencies for the front-end client application
 
 ```bash
-pip install foobar
+npm install
 ```
 
 ## Usage
