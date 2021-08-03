@@ -12,7 +12,7 @@ In this term project, you are asked to design a small database system, create an
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Java Installation guide can be found [here](https://java.com/en/download/help/download_options.html).
 
 ```bash
 pip install foobar
