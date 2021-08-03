@@ -24,6 +24,12 @@ Once NodeJs is install, run the command below to install the dependencies for th
 npm install
 ```
 
+After all the project dependencies have been installed, run the command below to run the client application on a local server
+
+```bash
+npm start OR ng serve
+```
+
 ## Usage
 
 ```python
