@@ -27,7 +27,7 @@ npm install
 After all the project dependencies have been installed, run the command below to run the client application on a local server
 
 ```bash
-npm start OR ng serve
+npm start
 ```
 OR
 
@@ -37,23 +37,26 @@ ng serve
 
 ## Usage
 
-```python
-import foobar
+The back-end Java application can run using the maven command below (if maven is installed on the machine)
 
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+```bash
+mvn spring-boot:run
 ```
+
+Or the Java command below to run the Jar file after compiling the project
+
+```bash
+ java -jar target
+```
+
+## Developers
+
+Roland Junior Toussaint - Developer
+Muhktar Abare - Developer
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
-
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[NJIT](https://www.njit.edu/)
