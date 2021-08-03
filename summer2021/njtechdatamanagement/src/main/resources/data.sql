@@ -71,26 +71,26 @@ INSERT INTO Staff (staff_ssn, staff_name, staff_salary, staff_rank, staff_course
 
 # Adding sections to the database
 INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (5, 2021, 10, 267027259);
-INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (3, 2020, 4, 554627396);
+INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (3, 2021, 4, 554627396);
 INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (8, 2021, 5, 399753850);
 INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (7, 2021, 3, 641341916);
 INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (6, 2021, 10, 560803338);
 INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (4, 2021, 12, 876548487);
 INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (2, 2021, 19, 287930387);
 INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (1, 2021, 17, 733376354);
-INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (10, 2020, 4, 309525505);
+INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (10, 2021, 4, 309525505);
 INSERT INTO Sections (course_number, section_year, section_max_enroll, staff_ssn) VALUES (9, 2022, 14, 16185652);
 
 # Adding registrations to the database
-INSERT INTO Registrations (student_id, section_number, course_number) VALUES (13, 7, 3);
-INSERT INTO Registrations (student_id, section_number, course_number) VALUES (5, 5, 6);
-INSERT INTO Registrations (student_id, section_number, course_number) VALUES (10, 3, 5);
-INSERT INTO Registrations (student_id, section_number, course_number) VALUES (9, 1, 8);
-INSERT INTO Registrations (student_id, section_number, course_number) VALUES (15, 9, 1);
-INSERT INTO Registrations (student_id, section_number, course_number) VALUES (2, 7, 7);
-INSERT INTO Registrations (student_id, section_number, course_number) VALUES (4, 6, 5);
-INSERT INTO Registrations (student_id, section_number, course_number) VALUES (6, 4, 2);
-INSERT INTO Registrations (student_id, section_number, course_number) VALUES (17, 2, 9);
+# INSERT INTO Registrations (student_id, section_number, course_number) VALUES (13, 7, 3);
+# INSERT INTO Registrations (student_id, section_number, course_number) VALUES (5, 5, 6);
+# INSERT INTO Registrations (student_id, section_number, course_number) VALUES (10, 3, 5);
+# INSERT INTO Registrations (student_id, section_number, course_number) VALUES (9, 1, 8);
+# INSERT INTO Registrations (student_id, section_number, course_number) VALUES (15, 9, 1);
+# INSERT INTO Registrations (student_id, section_number, course_number) VALUES (2, 7, 7);
+# INSERT INTO Registrations (student_id, section_number, course_number) VALUES (4, 6, 5);
+# INSERT INTO Registrations (student_id, section_number, course_number) VALUES (6, 4, 2);
+# INSERT INTO Registrations (student_id, section_number, course_number) VALUES (17, 2, 9);
 
 # Adding buildings to the database
 INSERT INTO Buildings (building_name, building_location) VALUES ('Lesser Snakeroot', '12 Ludington Plaza, NW campus');
