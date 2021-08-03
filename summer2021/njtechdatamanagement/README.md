@@ -29,6 +29,11 @@ After all the project dependencies have been installed, run the command below to
 ```bash
 npm start OR ng serve
 ```
+OR
+
+```bash
+ng serve
+```
 
 ## Usage
 
