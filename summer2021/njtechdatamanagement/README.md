@@ -51,8 +51,8 @@ Or the Java command below to run the Jar file after compiling the project
 
 ## Developers
 
-Roland Junior Toussaint - Developer
-Muhktar Abare - Developer
+* Roland Junior Toussaint - Developer
+* Muhktar Abare - Developer
 
 
 ## Contributing
