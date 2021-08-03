@@ -46,7 +46,7 @@ mvn spring-boot:run
 Or the Java command below to run the Jar file after compiling the project
 
 ```bash
- java -jar target
+ java -jar [full path of jar file]
 ```
 
 ## Developers
